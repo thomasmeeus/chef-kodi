@@ -37,7 +37,7 @@ template '/etc/polkit-1/localauthority/50-local.d/custom-actions.pkla' do
   owner 'root'
 end
 
-template '/etc/init.d/kodi.conf' do
+template '/etc/init.d/kodi' do
   source 'kodi.conf.erb'
   owner 'root'
   mode '0755'
