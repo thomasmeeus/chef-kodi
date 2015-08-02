@@ -1,0 +1,26 @@
+---
+driver:
+  name: vagrant
+driver_config:
+  require_chef_omnibus: true
+  customize:
+    memory: 2048
+    natdnshostresolver1: "on"
+
+platforms:
+- name: opscode_debian-8.1
+  driver_config:
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-8.1_chef-provisionerless.box
+
+suites:
+- name: default
+  run_list: ["recipe[chef-kodi::default]"]
+  driver:
+    network:
+      - ["forwarded_port", {guest: 80, host: 80}]
+      - ["private_network", {ip: "33.33.33.33"}]
+
+provisioner:
+  name: chef_solo
+  solo_rb:
+    ssl_verify_mode: verify_peer
